@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{},~{::title})}">
+    <title>Lista de Pacientes</title>
+</head>
+<body>
+<main>
+
+<div class="container">
+    <h1>LISTA DE PACIENTES</h1>
+    <!-- Formulário de Pesquisa-->
+    <form th:action="@{/pacientes/buscar}" method="get">
+        <input type="text" name="nome" placeholder="Nome do paciente">
+        <button type="submit">Buscar</button>
+    </form>
+    <table class="table" border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Consultas</th>
+            <th sec:authorize="hasAnyRole('ADMIN')"></th>
+            <th sec:authorize="hasAnyRole('ADMIN')"></th>
+        </tr>
+        </thead>
+        <tr th:each="p : ${pacientes}">
+            <td th:text="${p.id}"> </td>
+            <td th:text="${p.nome}"> </td>
+            <td th:text="${p.telefone}"> </td>
+            <td> <a th:href="@{/pacientes/listconsulpaciente/{id}(id=${p.id})}" class="btn btn-secondary btn-sm">Abrir Lista de Consultas</a> </td>
+            <td sec:authorize="hasAnyRole('ADMIN')"> <a th:href="@{/pacientes/edit/{id}(id=${p.id})}" class="btn btn-primary btn-sm">Editar</a> </td>
+            <td sec:authorize="hasAnyRole('ADMIN')"> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pacientes/remove/{id}(id=${p.id})}" class="btn btn-danger btn-sm">Excluir</a> </td>
+        </tr>
+    </table>
+</div>
+
+</main>
+</body>
+</html>

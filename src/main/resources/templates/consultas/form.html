@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{},~{::title})}">
+    <title>Cadastro de Consulta</title>
+</head>
+
+<body>
+<main>
+    <div class="container">
+        <h1>Consulta:</h1>
+        <form th:action="${consulta.id == null} ? @{/consultas/save} : @{/consultas/update}" th:object="${consulta}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <!-- Seletor de Paciente -->
+            <div class="form-group">
+                <label>Paciente:</label>
+                <select id="paciente" name="paciente" th:field="*{paciente.id}" class="form-select">
+                    <option th:each="p : ${pacientes}"
+                            th:value="${p.id}"
+                            th:text="${p.nome}">
+                    </option>
+                </select>
+            </div>
+
+            <!-- Seletor de Médico -->
+            <div class="form-group">
+                <label>Médico:</label>
+                <select id="medico" name="medico" th:field="*{medico.id}" class="form-select">
+                    <option th:each="m : ${medicos}"
+                            th:value="${m.id}"
+                            th:text="${m.nome}">
+                    </option>
+                </select>
+            </div>
+
+            <input class="form-control" type="text" th:field="*{observacao}" placeholder="Observação" th:errorclass="is-invalid">
+            <div class="alert alert-danger" th:errors="${consulta.observacao}"></div>
+            <input class="form-control" type="date" th:field="*{data}" placeholder="Data" th:errorclass="is-invalid">
+            <div class="alert alert-danger" th:errors="${consulta.data}"></div>
+            <input class="form-control" type="number" th:field="*{valor}" placeholder="Valor" step="0.01" th:errorclass="is-invalid">
+            <div class="alert alert-danger" th:errors="${consulta.valor}"></div>
+
+
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+</main>
+</body>
+</html>

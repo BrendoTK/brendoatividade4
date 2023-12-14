@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{},~{::title})}">
+    <title>Cadastro de Médico</title>
+</head>
+<body>
+<main>
+
+<div class="container">
+    <h1>Medico:</h1>
+    <form th:action="${medico.id == null} ? @{/medicos/save} : @{/medicos/update}" th:object="${medico}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome" th:errorclass="is-invalid">
+        <div class="alert alert-danger" th:errors="${medico.nome}"></div>
+        <input class="form-control" type="text" th:field="*{crm}" placeholder="CRM" th:errorclass="is-invalid">
+        <div class="alert alert-danger" th:errors="${medico.crm}"></div>
+
+        <!-- Mensagem de sucesso -->
+        <!-- <span th:text="${!#strings.isEmpty(sucesso)} ? ${sucesso}"> </span> -->
+
+        <input type="submit" value="Enviar">
+    </form>
+</div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,58 @@
+
+<header class="container" th:fragment="header">
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/home}">
+                <img src="/images/clinicalogo.png" class="logo-imagem" alt="BrenClínica" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" th:href="@{/home}">Início</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Consultas
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/consultas/list}">Lista de Consultas</a></li>
+                            <li sec:authorize="hasAnyRole('ADMIN')"><hr class="dropdown-divider"></li>
+                            <li sec:authorize="hasAnyRole('ADMIN')"><a class="dropdown-item" th:href="@{/consultas/form}">Cadastrar Consulta</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Pacientes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/pacientes/list}">Lista de Pacientes</a></li>
+                            <li sec:authorize="hasAnyRole('ADMIN')"><hr class="dropdown-divider"></li>
+                            <li sec:authorize="hasAnyRole('ADMIN')"><a class="dropdown-item" th:href="@{/pacientes/form}">Cadastrar Pacientes</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Médicos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/medicos/list}">Lista de Médicos</a></li>
+                            <li sec:authorize="hasAnyRole('ADMIN')"><hr class="dropdown-divider"></li>
+                            <li sec:authorize="hasAnyRole('ADMIN')"><a class="dropdown-item" th:href="@{/medicos/form}">Cadastrar Médicos</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form th:action="@{/logout}" method="post" class="d-flex" role="deslogar">
+                    <div class="ne-2">
+                        <h3>Olá <strong sec:authentication="name"></strong></h3>
+                    </div>
+                    <button class="btn btn-outline-success" type="submit">Sair</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+</header>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{},~{::title})}">
+    <title>Cadastro de Paciente</title>
+</head>
+<body>
+<main>
+
+<div class="container">
+    <h1>Paciente:</h1>
+    <form th:action="${paciente.id == null} ? @{/pacientes/save} : @{/pacientes/update}" th:object="${paciente}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome" th:errorclass="is-invalid">
+        <div class="alert alert-danger" th:errors="${paciente.nome}"></div>
+        <input class="form-control" type="tel" th:field="*{telefone}" placeholder="Telefone" th:errorclass="is-invalid">
+        <div class="alert alert-danger" th:errors="${paciente.telefone}"></div>
+        <input type="submit" value="Enviar">
+    </form>
+</div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<head th:replace="~{fragments/head :: head(~{},~{::title})}">
+    <title>Lista de Consultas do Paciente</title>
+</head>
+<body>
+<main>
+
+<div class="container">
+    <h1>CONSULTAS DO PACIENTE</h1>
+    <div th:if="${consultas != null and consultas.size() > 0}">
+        <h2 th:text="${consultas[0].paciente.nome}"></h2>
+    </div>
+    <table class="table" border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Medico</th>
+            <th>Observação</th>
+            <th>Data</th>
+            <th>Valor</th>
+        </tr>
+        </thead>
+        <tr th:each="consulta : ${consultas}">
+            <td th:text="${consulta.id}"></td>
+            <td th:text="${consulta.medico.nome}"></td>
+            <td th:text="${consulta.observacao}"></td>
+            <td th:text="${consulta.data}"></td>
+            <td th:text="${consulta.valor}"></td>
+        </tr>
+    </table>
+</div>
+
+</main>
+</body>
+</html>
